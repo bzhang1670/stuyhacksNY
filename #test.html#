@@ -1,0 +1,20 @@
+<!doctype html>
+<head>
+  <link href="" rel="stylesheet">
+  
+</head>
+
+<title>localchat</title>
+<body>
+<h1>Hi!</h1>
+
+<script>
+
+  getCheckin();
+
+</script>
+
+<script type="text/javascript" src="checkin.js"></script>
+
+</body>
+</html>
