@@ -18,7 +18,7 @@ function savePosition(position)
     var secret="&client_secret=HUO1BXW4Z12ZELV1AGVDSCHV3EE4RVH2EGPFLEKE535VR3JO";
     var version="&v=20140405";
     var ll="&ll=" + $("#lat").val() + ", " + $("#lng").val(); /*40.805, -73.961*/
-    alert($("#lat").val());
+    //alert($("#lat").val());
     //var radius="&radius=300"
     
     var url = baseurl+id+secret+version+ll//+radius;
