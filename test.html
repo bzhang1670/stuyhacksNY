@@ -1,19 +1,72 @@
 <!doctype html>
 <head>
-  
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" id="jquery"></script>
 </head>
-
+<html>
 <title>localchat</title>
 <body>
-<h1>Hi!</h1>
+<h1>Sorry, we don't have much stuff yet!</h1>
+<!---
+<input type="button" value="Show location" onclick="javascript:showlocation();" /> <br/>
+Latitude: <span id="latitude"></span> <br/>
+Longitude: <span id="longitude"></span>---->
+<br>
 
-<script>
+<div id="names">
+</div>
 
-  getCheckin();
+
+
+<script type="text/javascript">
+
+  function fslocation(name, distance, id) {
+    this.name = name;
+    this.distance = distance;
+    this.id;
+  };
+
+  var getlocationArray = function(url) {
+    var locArr = [];
+
+    $.getJSON(url, function(data) {
+      $.each(data.response.venues, function (i,venues) {
+        content = "<p>" + "name: " + venues.name + "|     distance: " + venues.location.distance + "|     id: " + venues.id  + "</p>";
+        $(content).appendTo("#names");
+        var loc = new fslocation(venues.name, venues.distance, venues.id);
+        locArr.push(loc);
+      });
+    });
+    return locArr;
+  }
+
+  //This will loop through a location array
+  var getnearestlocation = function (locArray) {
+   min=locArray[0];
+    for(var i = 1; i < locArray.length; i++) {
+      if(locArray[i].distance > min.distance) {
+        //console.log(min.name);
+        min=locArray[i];
+      }
+    }
+    return min;
+  }
+  
+  //What one would call 'dasit' (main) in java.
+  var baseurl="https://api.foursquare.com/v2/venues/search?";
+  var id="client_id=R3KEC5QXX1QAWWVFDJT32RMJF4GP0CBB3PX5D3DIKFJTR0K5";
+  var secret="&client_secret=HUO1BXW4Z12ZELV1AGVDSCHV3EE4RVH2EGPFLEKE535VR3JO";
+  var version="&v=20140405";
+  var ll="&ll=40.805, -73.961"
+  //var radius="&radius=300"
+
+  var url = baseurl+id+secret+version+ll//+radius;
+  document.write(url);
+  console.log(getnearestlocation(getlocationArray(url)));
+
+
+
 
 </script>
-
-<script type="text/javascript" src="checkin.js"></script>
-
 </body>
 </html>
