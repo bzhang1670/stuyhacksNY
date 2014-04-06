@@ -1,3 +1,4 @@
+$(document).ready(getLocation());
 function getLocation()
 {
     if (navigator.geolocation)
