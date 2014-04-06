@@ -13,8 +13,8 @@ def home():
 @app.route('/chat', methods=['POST'])
 def submit():
 	if request.method == 'POST':
-		#return request.form['user_name'] + " " + request.form['location']
-		return render_template('chat.html', name=request.form['user_name'], loc=request.form['location'])
+		return request.form['user_name'] + " " + request.form['location']
+		#return render_template('chat.html', name=request.form['user_name'], loc=request.form['location'])
 
 if __name__ == '__main__':
 	app.run()
