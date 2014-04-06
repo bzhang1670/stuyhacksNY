@@ -2,11 +2,44 @@
 <head>
   <link href="css/bootstrap.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" id="jquery"></script>
+  <script type="text/javascript">
+  function showLocation(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    alert("Latitude : " + latitude + " Longitude: " + longitude);
+  }
+
+  function errorHandler(err) {
+    if(err.code == 1) {
+      alert("Error: Access is denied!");
+    }else if( err.code == 2) {
+      alert("Error: Position is unavailable!");
+    }
+  }
+  function getLocation(){
+
+   if(navigator.geolocation){
+      // timeout at 60000 milliseconds (60 seconds)
+      var options = {timeout:60000};
+      navigator.geolocation.getCurrentPosition(showLocation, 
+       errorHandler,
+       options);
+    }else{
+      alert("Sorry, browser does not support geolocation!");
+    }
+  }
+  </script>
 </head>
 <html>
 <title>localchat</title>
 <body>
-<h1>Sorry, we don't have much stuff yet!</h1>
+  <h1>Sorry, we don't have much stuff yet!</h1>
+
+
+  <form>
+   <input type="button" onclick="getLocation();"  
+   value="Get Location"/>
+ </form>
 <!---
 <input type="button" value="Show location" onclick="javascript:showlocation();" /> <br/>
 Latitude: <span id="latitude"></span> <br/>
@@ -18,28 +51,28 @@ Longitude: <span id="longitude"></span>---->
 
 <script type="text/javascript">
 
-  function fslocation(name, distance, id) {
-    this.name = name;
-    this.distance = distance;
-    this.id = id;
-  };
+function fslocation(name, distance, id) {
+  this.name = name;
+  this.distance = distance;
+  this.id = id;
+};
 
-  var getlocationArray = function(url) {
+var getlocationArray = function(url) {
 
-    locArr = new Array();
+  locArr = new Array();
 
-    $.getJSON(url, function(data) {
+  $.getJSON(url, function(data) {
 
-      $.each(data.response.venues, function (i,venues) {
-        content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
-        var loc = new fslocation(venues.name, venues.location.distance, venues.id);
-        locArr.push(loc);
-        $(content).appendTo("#names");
-      });
-
+    $.each(data.response.venues, function (i,venues) {
+      content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
+      var loc = new fslocation(venues.name, venues.location.distance, venues.id);
+      locArr.push(loc);
+      $(content).appendTo("#names");
     });
-    return locArr;
-  }
+
+  });
+  return locArr;
+}
 
 
 
@@ -52,14 +85,14 @@ Longitude: <span id="longitude"></span>---->
     console.log(parseInt(minhelper.length));
     for(var i = 1; i < minhelper.length; i++) {
       if(minhelper[i].distance > min.distance) {
-         console.log(minhelper[i].distance);
-         min=minhelper[i];
-      }
-    }
-    console.log(min);
-    return min;
+       console.log(minhelper[i].distance);
+       min=minhelper[i];
+     }
    }
-  
+   console.log(min);
+   return min;
+ }
+ 
   //What one would call 'dasit' (main) in java.
   var baseurl="https://api.foursquare.com/v2/venues/search?";
   var id="client_id=R3KEC5QXX1QAWWVFDJT32RMJF4GP0CBB3PX5D3DIKFJTR0K5";
@@ -75,6 +108,6 @@ Longitude: <span id="longitude"></span>---->
   console.log(getnearestLocation(arr));
 
 
-</script>
+  </script>
 </body>
 </html>
