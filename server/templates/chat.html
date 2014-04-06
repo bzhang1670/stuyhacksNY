@@ -1,16 +1,20 @@
 <html>
   <head>
-    <title>Firebase Chat Example</title>
+    <title>{{loc}} Chatroom</title>
     <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/cover2.css">
   </head>
   <body>
-    <div id='messagesDiv'></div>
+    <div class="row centered">
+      <h1>{{name}}@{{loc}}Columbia</h1>
+      <div id="messagesDiv"></div>
+      <input class="form-control" type='text' id='messageInput' placeholder="Press Enter to Send">
+    </div>
     <input type="hidden" id="username" value="{{ name }}">
-    <input type="hidden" id="location" value="https://chatchatchat.firebaseIO.com/{{loc}}">
-    <input type='text' id='messageInput' placeholder="Message...">
+    <input  type="hidden" id="location" value="https://chatchatchat.firebaseIO.com/{{loc}}">
     <script type="text/javascript">
     // Get a reference to the root of the chat data.
     var messagesRef = new Firebase($('#location').val());
@@ -28,10 +32,11 @@ $('#messageInput').keypress(function (e) {
 // Add a callback that is triggered for each chat message.
 messagesRef.on('child_added', function (snapshot) {
     var message = snapshot.val();
-    $('<div/>').text(message.text).prepend($('<em/>').text(message.name+': ')).appendTo($('#messagesDiv'));
+    $('<div/>').text(message.text).prepend($('<b/>').text(message.name+': ')).appendTo($('#messagesDiv'));
     $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
 });
 
     </script>
+    <script src="/static/js/bootstrap.min.js"></script>
   </body>
 </html>
