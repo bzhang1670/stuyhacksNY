@@ -16,20 +16,18 @@
 	    <h1 class="cover-heading">LocalChat</h1>
 	    <div class="row lead">
 	      <div class="col-xs-12">
-		<p>A local chatroom for every venue in the US.</p>
+		<p>A local chatroom for every venue in the US. <br> Meet people. Plan events. Broadcast messages.</p>
 	      </div>
-	      <div class="col-xs-2"></div>
+	      <div class="col-xs-0 col-sm-2"></div>
               <form action="/chat" method="POST">
-		<div class="col-xs-3">
-        	  <input type="text" placeholder="name" name="user_name"><br>
+		<div class="col-xs-8 col-sm-6">
+        	  <input class="form-control" type="text" placeholder="name" name="user_name"><br>
         	</div>
-		<div class="col-xs-3">
-		  <input type="text" placeholder="location" name="location"><br>
-        	</div>
-		<div class="col-xs-2">
-		  <input class="btn " type="submit" value="Log In">
+		<div class="col-xs-4 col-sm-2">
+		  <input class="btn btn-md btn-default" type="submit" value="Log In">
 		</div>
-		<div class="col-xs-2"></div>
+		<div class="col-xs-0 col-sm-2"></div>
+		<input type="hidden" placeholder="location" name="location"><br>
               </form>
 	    </div>
           </div>
