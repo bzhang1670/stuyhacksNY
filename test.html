@@ -26,7 +26,7 @@ Longitude: <span id="longitude"></span>---->
 
   var getlocationArray = function(url) {
 
-    locArr = [{}];
+    locArr = new Array();
 
     $.getJSON(url, function(data) {
 
@@ -41,14 +41,16 @@ Longitude: <span id="longitude"></span>---->
     return locArr;
   }
 
+
+
   //This will loop through a location array
-  function getnearestLocation(loray) {
+  var getnearestLocation = function(loray) {
     var minhelper = loray;
-    var min = minhelper[2];
+    var min = minhelper[0];
     console.log(min);
     console.log(minhelper);
-    console.log($(minhelper).size());
-    for(var i = 2; i < minhelper.length; i++) {
+    console.log(parseInt(minhelper.length));
+    for(var i = 1; i < minhelper.length; i++) {
       if(minhelper[i].distance > min.distance) {
          console.log(minhelper[i].distance);
          min=minhelper[i];
