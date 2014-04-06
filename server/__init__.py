@@ -11,7 +11,8 @@ def home():
 def submit():
 	if request.method == 'POST':
 		#return request.form['user_name'] + " " + request.form['location']
-		return render_template('chat.html', name=request.form['user_name'], loc=request.form['location'])
+		return render_template('chat.html', name=request.form['user_name'], 
+			loc=request.form['location_name'], locid=request.form['location_id'])
 
 if __name__ == '__main__':
 	app.run()

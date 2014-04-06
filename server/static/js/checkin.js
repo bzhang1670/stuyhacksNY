@@ -68,7 +68,7 @@ var getlocationArray = function(url) {
   var id="client_id=R3KEC5QXX1QAWWVFDJT32RMJF4GP0CBB3PX5D3DIKFJTR0K5";
   var secret="&client_secret=HUO1BXW4Z12ZELV1AGVDSCHV3EE4RVH2EGPFLEKE535VR3JO";
   var version="&v=20140405";
-  var ll="&ll=40.805, -73.961"
+  var ll="&ll=" + $("#lat").val() + ", " + $("#lng").val(); /*40.805, -73.961*/
   //var radius="&radius=300"
 
   var url = baseurl+id+secret+version+ll//+radius;
@@ -79,4 +79,7 @@ var getlocationArray = function(url) {
 
   var element = getnearestLocation(arr);
 
-  document.write(getnearestLocation(getlocationArray(url)));
+  //document.write(getnearestLocation(getlocationArray(url)));
+  $("#loc_name").val(element.name); 
+  $("#loc_id").val(element.id);
+
