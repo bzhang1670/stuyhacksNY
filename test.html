@@ -76,38 +76,47 @@ function fslocation(name, distance, id) {
 };
 
 var getlocationArray = function(url) {
-
-  locArr = new Array();
-
+  var locArr = [{}];
+  //locArr[0] = null;
   $.getJSON(url, function(data) {
-
     $.each(data.response.venues, function (i,venues) {
       content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
       var loc = new fslocation(venues.name, venues.location.distance, venues.id);
       locArr.push(loc);
       $(content).appendTo("#names");
     });
-
   });
+  document.write(locArr[0]);
   return locArr;
 }
 
   //This will loop through a location array
   var getnearestLocation = function(loray) {
+    document.write(loray);
+    document.write(loray[0]);
     var minhelper = loray;
-    var min = minhelper[0];
-    console.log(min);
     console.log(minhelper);
-    console.log(parseInt(minhelper.length));
+    var min = minhelper[0];
+    //document.write(min.name);
+    console.log(minhelper.length);
     for(var i = 1; i < minhelper.length; i++) {
-      if(minhelper[i].distance > min.distance) {
+      if(minhelper[i].distance < min.distance) {
        console.log(minhelper[i].distance);
        min=minhelper[i];
      }
    }
-   console.log(min);
+   //document.write(min.name);
    return min;
  }
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
  
   //What one would call 'dasit' (main) in java.
   var baseurl="https://api.foursquare.com/v2/venues/search?";
@@ -118,11 +127,15 @@ var getlocationArray = function(url) {
   //var radius="&radius=300"
 
   var url = baseurl+id+secret+version+ll//+radius;
-  document.write(url);
-  arr = getlocationArray(url);
-  console.log(arr);
-  console.log(getnearestLocation(arr));
 
+  document.write(url);
+  
+  arr = getlocationArray(url);
+  //sleep(10000);
+  var element = getnearestLocation(arr);
+  //sleep(10000);
+  document.write(getnearestLocation(getlocationArray(url)));
+  
 
   </script>
 </body>
