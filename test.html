@@ -26,37 +26,39 @@ Longitude: <span id="longitude"></span>---->
 
   var getlocationArray = function(url) {
 
-    locArr = [{}];
+    locArr = new Array();
 
     $.getJSON(url, function(data) {
 
       $.each(data.response.venues, function (i,venues) {
         content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
         var loc = new fslocation(venues.name, venues.location.distance, venues.id);
-        console.log(loc);
         locArr.push(loc);
-        console.log(loc.name);
-        console.log(loc.distance);
-        console.log(loc.id);
         $(content).appendTo("#names");
       });
 
     });
-    console.log(locArr);
     return locArr;
   }
 
+
+
   //This will loop through a location array
-  var getnearestlocation = function (loray) {
-   min=loray[1];
-    for(var i = 2; i < loray.length; i++) {
-      if(loray[i].distance > min.distance) {
-        //console.log(min.name);
-        min=loray[i];
+  var getnearestLocation = function(loray) {
+    var minhelper = loray;
+    var min = minhelper[0];
+    console.log(min);
+    console.log(minhelper);
+    console.log(parseInt(minhelper.length));
+    for(var i = 1; i < minhelper.length; i++) {
+      if(minhelper[i].distance > min.distance) {
+         console.log(minhelper[i].distance);
+         min=minhelper[i];
       }
     }
+    console.log(min);
     return min;
-  }
+   }
   
   //What one would call 'dasit' (main) in java.
   var baseurl="https://api.foursquare.com/v2/venues/search?";
@@ -68,9 +70,9 @@ Longitude: <span id="longitude"></span>---->
 
   var url = baseurl+id+secret+version+ll//+radius;
   document.write(url);
-  console.log(getnearestlocation(getlocationArray(url)));
-
-
+  arr = getlocationArray(url);
+  console.log(arr);
+  console.log(getnearestLocation(arr));
 
 
 </script>
