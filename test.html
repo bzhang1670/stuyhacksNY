@@ -76,17 +76,34 @@ function fslocation(name, distance, id) {
 };
 
 var getlocationArray = function(url) {
-  var locArr = [{}];
-  //locArr[0] = null;
-  $.getJSON(url, function(data) {
+
+  locArr = new Array();
+
+  $.ajax({
+    url: url,
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+
+      $.each(data.response.venues, function (i,venues) {
+        content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
+        var loc = new fslocation(venues.name, venues.location.distance, venues.id);
+        locArr.push(loc);
+        $(content).appendTo("#names");
+      });
+    }
+  })
+
+  /*$.getJSON(url, function(data) {
+
     $.each(data.response.venues, function (i,venues) {
       content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
       var loc = new fslocation(venues.name, venues.location.distance, venues.id);
       locArr.push(loc);
       $(content).appendTo("#names");
     });
-  });
-  document.write(locArr[0]);
+
+  });*/
   return locArr;
 }
 
