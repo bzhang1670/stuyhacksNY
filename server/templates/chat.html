@@ -15,7 +15,7 @@
       <input class="form-control" type='text' id='messageInput' placeholder="Press Enter to Send">
     </div>
     <input type="hidden" id="username" value="{{ name }}">
-    <input  type="hidden" id="location" value="https://chatchatchat.firebaseIO.com/{{loc}}">
+    <input  type="hidden" id="location" value="https://chatchatchat.firebaseIO.com/{{locid}}">
     <script type="text/javascript">
     // Get a reference to the root of the chat data.
     var messagesRef = new Firebase($('#location').val());
