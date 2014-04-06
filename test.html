@@ -3,36 +3,50 @@
   <link href="css/bootstrap.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" id="jquery"></script>
   <script type="text/javascript">
-  function Coord(long, lat) {
-  this.long = long;
-  this.lat = lat;
-  }
+  // function Coord(long, lat) {
+  // this.long = long;
+  // this.lat = lat;
+  // }
 
-  function showLocation(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    alert("Latitude : " + latitude + " Longitude: " + longitude);
-  }
+  // function showLocation(position) {
+  //   var latitude = position.coords.latitude;
+  //   var longitude = position.coords.longitude;
+  //   alert("Latitude : " + latitude + " Longitude: " + longitude);
+  // }
 
-  function errorHandler(err) {
-    if(err.code == 1) {
-      alert("Error: Access is denied!");
-    }else if( err.code == 2) {
-      alert("Error: Position is unavailable!");
+  // function errorHandler(err) {
+  //   if(err.code == 1) {
+  //     alert("Error: Access is denied!");
+  //   }else if( err.code == 2) {
+  //     alert("Error: Position is unavailable!");
+  //   }
+  // }
+
+  // function getLocation(){
+  //  if(navigator.geolocation){
+  //     // timeout at 60000 milliseconds (60 seconds)
+  //     var options = {timeout:60000};
+  //     navigator.geolocation.getCurrentPosition(showLocation, 
+  //      errorHandler,
+  //      options);
+  //   }else{
+  //     alert("Sorry, browser does not support geolocation!");
+  //   }
+  // }
+  window.onload=function(){
+    if(navigator.geolocation)
+    {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else
+    {
+      alert("Geolocation is not supported by this browser.");
     }
   }
-
-  function getLocation(){
-   if(navigator.geolocation){
-      // timeout at 60000 milliseconds (60 seconds)
-      var options = {timeout:60000};
-      navigator.geolocation.getCurrentPosition(showLocation, 
-       errorHandler,
-       options);
-    }else{
-      alert("Sorry, browser does not support geolocation!");
-    }
+  function showPosition(pos){
+    alert("Latitude: "+pos.coords.latitude+"\nLongitude: "+pos.coords.longitude);
   }
+
   </script>
 </head>
 <html>
@@ -40,11 +54,10 @@
 <body>
   <h1>Sorry, we don't have much stuff yet!</h1>
 
-
-  <form>
+  <!-- <form>
    <input type="button" onclick="getLocation();"  
    value="Get Location"/>
- </form>
+ </form> -->
 <!---
 <input type="button" value="Show location" onclick="javascript:showlocation();" /> <br/>
 Latitude: <span id="latitude"></span> <br/>
