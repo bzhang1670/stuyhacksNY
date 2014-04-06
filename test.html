@@ -102,24 +102,6 @@ Longitude: <span id="longitude"></span>-->
       }
     });
 
-    /*$.getJSON(url, function(data) {
-
-      $.each(data.response.venues, function (i,venues) {
-        content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
-        var loc = new fslocation(venues.name, venues.location.distance, venues.id);
-        //console.log(loc);
-        locArr.push(loc);
-        console.log("Step 1: " + locArr.length)
-        $(content).appendTo("#names");
-      });
-      console.log("Step 2: " + locArr.length);
-      finished = true;
-
-    });*/
-
-    while ( finished == null) {document.write("nope");}
-    
-    console.log("Step 3: " + locArr.length);
     return locArr;
   }
 
@@ -152,19 +134,16 @@ var getlocationArray = function(url) {
     var minhelper = loray;
     var min = minhelper[0];
     //console.log(min);
-    console.log("Minhelthper length: " + minhelper.length);
+    console.log("Minhelper length: " + minhelper.length);
     for(var i = 1; i < minhelper.length; i++) {
       if(minhelper[i].distance > min.distance) {
-         console.log(minhelper[i].distance);
+         //console.log(minhelper[i].distance);
          min=minhelper[i];
       }
     }
     //console.log(min);
     return min;
-   }
-   console.log(min);
-   return min;
- }
+  }
  
   //What one would call 'dasit' (main) in java.
   var baseurl="https://api.foursquare.com/v2/venues/search?";
@@ -179,7 +158,7 @@ var getlocationArray = function(url) {
   arr = getlocationArray(url);
   //console.log("Location array length: " + arr.length);
   console.log(arr);
-  console.log("0th element of the array: " + arr[0])
+  //console.log("0th element of the array: " + arr[0])
   console.log(getnearestLocation(arr));
 
 
