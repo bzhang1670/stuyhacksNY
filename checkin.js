@@ -1,14 +1,82 @@
-/**************
+function fslocation(name, distance, id) {
+  this.name = name;
+  this.distance = distance;
+  this.id = id;
+};
 
-authentication stuff
+var getlocationArray = function(url) {
 
-***************/
+  locArr = new Array();
 
+  $.ajax({
+    url: url,
+    dataType: 'json',
+    async: false,
+    success: function(data) {
 
+      $.each(data.response.venues, function (i,venues) {
+        content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
+        var loc = new fslocation(venues.name, venues.location.distance, venues.id);
+        locArr.push(loc);
+        $(content).appendTo("#names");
+      });
+    }
+  })
 
-function getCheckin() {
-    
-    window.location.replace("https://foursquare.com/oauth2/authenticate
-    ?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REGISTERED_REDIRECT_URI");
+  /*$.getJSON(url, function(data) {
 
+    $.each(data.response.venues, function (i,venues) {
+      content = "<p>" + " name: " + venues.name + " |     distance: " + venues.location.distance + " |     id: " + venues.id  + "</p>";
+      var loc = new fslocation(venues.name, venues.location.distance, venues.id);
+      locArr.push(loc);
+      $(content).appendTo("#names");
+    });
+
+  });*/
+  return locArr;
 }
+
+  //This will loop through a location array
+  var getnearestLocation = function(loray) {
+    var minhelper = loray;
+    var min = minhelper[0];
+    for(var i = 1; i < minhelper.length; i++) {
+      if(minhelper[i].distance < min.distance) {
+       min=minhelper[i];
+     }
+   }
+   return min;
+ }
+
+ window.onload=function(){
+    if(navigator.geolocation)
+    {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else
+    {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+  function showPosition(pos){
+    alert("Latitude: "+pos.coords.latitude+"\nLongitude: "+pos.coords.longitude);
+  }
+
+ 
+  //What one would call 'dasit' (main) in java.
+  var baseurl="https://api.foursquare.com/v2/venues/search?";
+  var id="client_id=R3KEC5QXX1QAWWVFDJT32RMJF4GP0CBB3PX5D3DIKFJTR0K5";
+  var secret="&client_secret=HUO1BXW4Z12ZELV1AGVDSCHV3EE4RVH2EGPFLEKE535VR3JO";
+  var version="&v=20140405";
+  var ll="&ll=40.805, -73.961"
+  //var radius="&radius=300"
+
+  var url = baseurl+id+secret+version+ll//+radius;
+
+  document.write(url);
+  
+  arr = getlocationArray(url);
+
+  var element = getnearestLocation(arr);
+
+  document.write(getnearestLocation(getlocationArray(url)));
