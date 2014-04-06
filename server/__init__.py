@@ -1,17 +1,20 @@
 from flask import Flask, request, render_template, url_for, redirect, request
-import urllib2
-from pymongo import MongoClient
-
 
 app = Flask(__name__)
-client = MongoClient("mongodb://sshi:1@troup.mongohq.com:10070/sonido")
-db = client.sonido
-collection = db.mapdata
-AllTheThings = list(collection.find())
+user_name = 'Dan'
+chat_room_name = 'columbia'
+lol = "lol"
 
 @app.route("/")
 def home():
-    blub="LOL I HAVE A WEBSITE"
-    return render_template("index.html", blub=blub)
+    return render_template('index.html')
 
+#Accept GET request with param user_name (user's name) and location (user's location)
+@app.route('/chat', methods=['POST'])
+def submit():
+	if request.method == 'POST':
+		return request.form['user_name'] + " " + request.form['location']
+		#return render_template('chat.html', name=user_name, loc=location)
 
+if __name__ == '__main__':
+	app.run()

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Log In</title>
+    </head>
+    <body>
+        <div class="errors"></div>
+        <form action="/chat" method="POST">
+            <input type="text" placeholder="name" name="user_name"><br>
+            <input type="text" placeholder="location" name="location"><br>
+            <input type="submit" value="Log In">
+        </form>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    <script>
+        /*$('input[type=submit]').click(function(){
+            $(".errors").load(window.location.protocol + "//" + window.location.host + "?username=" + $("input[name=username]").val());
+            window.location.href = "chat.html";
+            return false;
+    });*/
+    </script>
+</html>
