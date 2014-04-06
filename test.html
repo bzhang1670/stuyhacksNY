@@ -69,7 +69,6 @@ Longitude: <span id="longitude"></span>-->
 
 <script type="text/javascript">
 
-<<<<<<< HEAD
   var finished = null;
 
   function fslocation(name, distance, id) {
@@ -124,7 +123,6 @@ Longitude: <span id="longitude"></span>-->
     return locArr;
   }
 
-=======
 function fslocation(name, distance, id) {
   this.name = name;
   this.distance = distance;
@@ -143,8 +141,6 @@ var getlocationArray = function(url) {
       locArr.push(loc);
       $(content).appendTo("#names");
     });
->>>>>>> 8c0a0ae3b07fa9459f8bc4e0e6f972227dcd16dd
-
   });
   return locArr;
 }
@@ -159,18 +155,12 @@ var getlocationArray = function(url) {
     console.log("Minhelthper length: " + minhelper.length);
     for(var i = 1; i < minhelper.length; i++) {
       if(minhelper[i].distance > min.distance) {
-<<<<<<< HEAD
          console.log(minhelper[i].distance);
          min=minhelper[i];
       }
     }
     //console.log(min);
     return min;
-=======
-       console.log(minhelper[i].distance);
-       min=minhelper[i];
-     }
->>>>>>> 8c0a0ae3b07fa9459f8bc4e0e6f972227dcd16dd
    }
    console.log(min);
    return min;
