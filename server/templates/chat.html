@@ -6,17 +6,21 @@
     <link rel="icon" type="image/ico" href="/static/img/icon.ico">
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/cover2.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/cover.css">
   </head>
   <body>
     <div class="row centered">
       <h1>{{name}}@{{loc}}</h1>
-      <p>{{locid}}</p>
-      <div id="messagesDiv"></div>
-      <input class="form-control" type='text' id='messageInput' placeholder="Press Enter to Send">
+      <!--<p>{{locid}}</p>-->
+      <div style="opacity:0.6; color:black; width: 90%; margin-left:auto; margin-right:auto;" class="well">
+        <div id="messagesDiv" style="text-align:left; height:75vh; overflow: auto; color: black; opacity: 1 !important;">
+        </div>
+      </div>
+      <input style="left: 5vw; bottom:10px; width:90%; position: fixed; z-index:150; _top:expression(eval(document.documentElement.scrollTop+
+        (document.documentElement.clientHeight-this.offsetHeight)));" class="form-control" type='text' id='messageInput' placeholder="Press Enter to Send">
     </div>
     <input type="hidden" id="username" value="{{ name }}">
-    <input  type="hidden" id="location" value="https://chatchatchat.firebaseIO.com/{{locid}}">
+    <input  type="hidden" id="location" value="https://loudspkr.firebaseIO.com/{{locid}}">
     <script type="text/javascript">
     // Get a reference to the root of the chat data.
     var messagesRef = new Firebase($('#location').val());
@@ -28,9 +32,9 @@ $('#messageInput').keypress(function (e) {
 	var text = $('#messageInput').val();
         if (text.length > 0) {
           messagesRef.push({name:name, text:text});
-	  $('#messageInput').val(''); 
+	        $('#messageInput').val(''); 
         } else {
-        alert("Your message was empty. Please type something.");
+          alert("Your message was empty. Please type something.");
         }
     }
 });
